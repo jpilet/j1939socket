@@ -15,6 +15,7 @@ class J1939Socket : public Nan::ObjectWrap {
 
     static NAN_METHOD(New);
     static NAN_METHOD(open);
+    static NAN_METHOD(fetch);
 
     static Nan::Persistent<v8::Function> constructor;
 

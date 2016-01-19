@@ -10,6 +10,9 @@
       "include_dirs": [
         "src/include",
         "<!(node -e \"require('nan')\")"
+      ],
+      "cflags_cc": [
+	"-std=c++11"
       ]
     }
   ]
