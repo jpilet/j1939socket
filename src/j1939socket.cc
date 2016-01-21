@@ -55,7 +55,11 @@ class Packet {
     Nan::HandleScope scope;
 
     Local<Number> dstAddr = Nan::New<Number>(dstAddr_);
-    Local<String> srcAddr = Nan::New<String>(libj1939_addr2str(&src_)).ToLocalChecked();
+
+    char str[32];
+    snprintf(str, sizeof(str), "%0llx", (unsigned long long) src_.can_addr.j1939.name);
+    Local<String> srcName = Nan::New<String>(str).ToLocalChecked();
+    Local<Number> pgn = Nan::New<Number>(src_.can_addr.j1939.pgn);
     Local<Date> timestamp =
       Nan::New<Date>(time_.tv_sec * 1000.0
                      + time_.tv_usec / 1000.0).ToLocalChecked();
@@ -64,7 +68,8 @@ class Packet {
     Local<v8::Value> argv[] = {
       Nan::NewBuffer(data_, length_).ToLocalChecked(),
       timestamp,
-      srcAddr,
+      srcName,
+      pgn,
       priority,
       dstAddr
     };
