@@ -60,6 +60,7 @@ class Packet {
     snprintf(str, sizeof(str), "%0llx", (unsigned long long) src_.can_addr.j1939.name);
     Local<String> srcName = Nan::New<String>(str).ToLocalChecked();
     Local<Number> pgn = Nan::New<Number>(src_.can_addr.j1939.pgn);
+    Local<Number> addr = Nan::New<Number>(src_.can_addr.j1939.addr);
     Local<Date> timestamp =
       Nan::New<Date>(time_.tv_sec * 1000.0
                      + time_.tv_usec / 1000.0).ToLocalChecked();
@@ -71,7 +72,8 @@ class Packet {
       srcName,
       pgn,
       priority,
-      dstAddr
+      dstAddr,
+      addr
     };
     // buffer will be garbage collected by v8
     data_ = 0;
