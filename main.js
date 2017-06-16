@@ -8,3 +8,6 @@ exports.open = function(handlePacket) {
   setInterval(function() { socket.fetch(); }, 50);
 };
 
+exports.fetch = function() {
+  socket.fetch();
+}
